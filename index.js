@@ -27,20 +27,18 @@ class Contenedor {
 let productos = new Contenedor("./products.txt");
 
 app.get("/", async (req, res) => {
-    res.send("<h1>Hola, estas en la home!</h1><p>selecciona las rutas /products o /randomProducts para ver mas!</p>");
+    res.send("<h1>Hola, estas en la home!</h1><p>selecciona las rutas /productos o /productoRandom para ver mas!</p>");
 });
 
-app.get("/products", async (req, res, next) => {
+app.get("/productos", async (req, res) => {
     let array = await productos.getAll();
     res.send(array);
-    next();
 });
 
-app.get("/productoRandom", async (req, res, next) => {
+app.get("/productoRandom", async (req, res) => {
     let array = await productos.getAll();
     let randomProd = array[Math.floor(Math.random() * array.length)];
     res.send(randomProd);
-    next();
 });
 
 app.listen(puerto, () => {
